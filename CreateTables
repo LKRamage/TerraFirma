@@ -1,5 +1,5 @@
-drop table City;
 drop table Airport;
+drop table City;
 drop table Aircraft_Data;
 drop table Aircraft_Type;
 drop table Flight_Data;
@@ -15,14 +15,14 @@ Cust_Name VARCHAR2(15) CONSTRAINT Cust_Name_nn NOT NULL
 
 CREATE TABLE City
 (
-City_Code NUMBER(3) CONSTRAINT City_Code_PK PRIMARY KEY,
+City_Code NUMBER(3) CONSTRAINT City_Code_pk PRIMARY KEY,
 City_Name VARCHAR2(12) CONSTRAINT City_Name_nn NOT NULL,
-C_State_ CHAR(2) CONSTRAINT State_nn NOT NULL
+C_State_ CHAR(2) CONSTRAINT C_State_nn NOT NULL
 );
 
 CREATE TABLE Airport
 (
-Aprt_Code NUMBER(3) CONSTRAINT Aprt_Code_PK PRIMARY KEY,
+Aprt_Code NUMBER(3) CONSTRAINT Aprt_Code_pk PRIMARY KEY,
 Aprt_Name CHAR(12) CONSTRAINT Aprt_Name_nn NOT NULL,
 City_Code NUMBER(3),
 FOREIGN KEY (City_Code) REFERENCES City(City_Code)
@@ -30,35 +30,38 @@ FOREIGN KEY (City_Code) REFERENCES City(City_Code)
 
 CREATE TABLE Aircraft_Data 
 (
-AD_Type CHAR(5) CONSTRAINT AD_Type_PK PRIMARY KEY,
+AD_Type CHAR(5),
 AD_Description VARCHAR2(20),
 Capacity NUMBER(3),
-AC_Range NUMBER(4)
+AC_Range NUMBER(4),
+PRIMARY KEY (AD_Type)
 );
 
 CREATE TABLE  Aircraft_Type
 (
-Serial_NBR CHAR(8) CONSTRAINT Serial_nbr_PK PRIMARY KEY,
+Serial_Nbr CHAR(8),
 AD_Type CHAR(5),
-FOREIGN KEY (AD_Type) REFERENCES Aircraft_Data(AD_Type)
+FOREIGN KEY (AD_Type) REFERENCES Aircraft_Data(AD_Type),
+PRIMARY KEY (Serial_Nbr)
 );
 
 CREATE TABLE Flight_Data
 (
-Flight_NBR NUMBER(3) CONSTRAINT Flight_NBR_pk PRIMARY KEY,
-Dep_Aprt_Code CHAR(3) CONSTRAINT Dep_Aprt_Code_nn NOT NULL,
+Flight_Nbr NUMBER(3),
+Dep_Aprt_Code NUMBER(3) CONSTRAINT Dep_Aprt_Code_nn NOT NULL,
 FOREIGN KEY (Dep_Aprt_Code) REFERENCES Airport(Aprt_Code),
-Arr_Aprt_Code CHAR(3) CONSTRAINT Arr_Aprt_Code_nn NOT NULL,
-FOREIGN KEY (Arr_Aprt_Code) REFERENCES Airport(Aprt_Code)
+Arr_Aprt_Code NUMBER(3) CONSTRAINT Arr_Aprt_Code_nn NOT NULL,
+FOREIGN KEY (Arr_Aprt_Code) REFERENCES Airport(Aprt_Code),
+PRIMARY KEY (Flight_nbr)
 );
 
 CREATE TABLE Sched_Flight
 (
-Flight_NBR NUMBER(9),
+Flight_Nbr NUMBER(9),
 FOREIGN KEY (Flight_nbr) REFERENCES Flight_Data(Flight_NBR),
 Flight_Date CHAR(7),
-Serial_NBR CHAR(8) CONSTRAINT Serial_nbr NOT NULL,
-FOREIGN KEY (Serial_NBR) REFERENCES Aircraft_Type(Serial_NBR),
+Serial_Nbr CHAR(8) CONSTRAINT Serial_nbr NOT NULL,
+FOREIGN KEY (Serial_Nbr) REFERENCES Aircraft_Type(Serial_NBR),
 Dep_Time NUMBER(4) CONSTRAINT Dep_Time NOT NULL,
 Arr_Time NUMBER(4) CONSTRAINT Arr_Time NOT NULL,
 PRIMARY KEY (flight_nbr, flight_date)
@@ -66,8 +69,8 @@ PRIMARY KEY (flight_nbr, flight_date)
 
 CREATE TABLE Reservation
 (
-Cust_nbr NUMBER(4),
-Flight_nbr NUMBER(15),
+Cust_NBR NUMBER(4),
+Flight_NBR NUMBER(15),
 Flight_date VARCHAR(10),
 CONSTRAINT Reservation_pk PRIMARY KEY(Cust_nbr, Flight_nbr, Flight_date),
 FOREIGN KEY(Cust_nbr) REFERENCES Customer(Cust_nbr),
