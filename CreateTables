@@ -1,11 +1,13 @@
-drop table Airport;
-drop table City;
-drop table Aircraft_Data;
-drop table Aircraft_Type;
-drop table Flight_Data;
-drop table Sched_Flight;
 drop table Reservation;
 drop table Customer;
+drop table Sched_Flight;
+drop table Flight_Data;
+drop table Aircraft_Type;
+drop table Aircraft_Data;
+drop table Airport;
+drop table City;
+
+
 
 CREATE TABLE Customer
 ( 
@@ -22,9 +24,9 @@ C_State_ CHAR(2) CONSTRAINT C_State_nn NOT NULL
 
 CREATE TABLE Airport
 (
-Aprt_Code NUMBER(3) CONSTRAINT Aprt_Code_pk PRIMARY KEY,
-Aprt_Name CHAR(12) CONSTRAINT Aprt_Name_nn NOT NULL,
+Aprt_Code CHAR(3) CONSTRAINT Aprt_Code_pk PRIMARY KEY,
 City_Code NUMBER(3),
+Aprt_Name CHAR(12) CONSTRAINT Aprt_Name_nn NOT NULL,
 FOREIGN KEY (City_Code) REFERENCES City(City_Code)
 );
 
