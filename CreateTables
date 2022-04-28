@@ -3,7 +3,6 @@
 Set Echo on
 Set Pagesize 52
 Set Linesize 200
-
 drop table Reservation;
 drop table Customer;
 drop table Sched_Flight;
@@ -12,9 +11,6 @@ drop table Aircraft_Type;
 drop table Aircraft_Data;
 drop table Airport;
 drop table City;
-
-
-
 CREATE TABLE Customer
 ( 
 Cust_Nbr NUMBER(4) CONSTRAINT Cust_Nbr_pk PRIMARY KEY,
