@@ -1,0 +1,11 @@
+
+
+
+CREATE TABLE Reservation (
+Cust_num NUMBER(4),
+Flight_num NUMBER(3),
+Flight_date VARCHAR(10),
+CONSTRAINT Reservation_pk PRIMARY KEY(Cust_num, Flight_num, Flight_date),
+FOREIGN KEY(Cust_num) REFERENCES Customer(Cust_num),
+FOREIGN KEY(Flight_num, Flight_date) REFERENCES Sched_flight(Flight_num, Flight_date)
+);

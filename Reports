@@ -1,0 +1,16 @@
+##Report4
+SELECT
+    Flight_num,
+    Flight_date,
+    AC_Serial,
+    COUNT (cust_num) AS seats_booked,
+    capacity - COUNT (cust_num) AS seats_available
+FROM
+    Sched_flight
+    LEFT JOIN reservation USING (Flight_Num, Flight_Date)
+    LEFT JOIN aircraft USING (AC_Serial)
+    FULL JOIN aircraft_data USING (AC_Type)
+GROUP BY
+    Flight_Num, Flight_date, AC_Serial, capacity
+ORDER BY
+    Flight_Date, Flight_num;
