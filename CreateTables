@@ -1,3 +1,7 @@
+Set Echo on
+Set Pagesize 52
+Set Linesize 200
+
 drop table Reservation;
 drop table Customer;
 drop table Sched_Flight;
@@ -14,14 +18,14 @@ CREATE TABLE Customer
 Cust_Nbr NUMBER(4) CONSTRAINT Cust_Nbr_pk PRIMARY KEY,
 Cust_Name VARCHAR2(15) CONSTRAINT Cust_Name_nn NOT NULL
 );
-
+commit;
 CREATE TABLE City
 (
 City_Code NUMBER(3) CONSTRAINT City_Code_pk PRIMARY KEY,
 City_Name VARCHAR2(12) CONSTRAINT City_Name_nn NOT NULL,
 C_State_ CHAR(2) CONSTRAINT C_State_nn NOT NULL
 );
-
+commit;
 CREATE TABLE Airport
 (
 Aprt_Code CHAR(3) CONSTRAINT Aprt_Code_pk PRIMARY KEY,
@@ -29,7 +33,7 @@ City_Code NUMBER(3),
 Aprt_Name CHAR(26) CONSTRAINT Aprt_Name_nn NOT NULL,
 FOREIGN KEY (City_Code) REFERENCES City(City_Code)
 );
-
+commit;
 CREATE TABLE Aircraft_Data 
 (
 AD_Type CHAR(5),
@@ -38,7 +42,7 @@ Capacity NUMBER(3),
 AC_Range NUMBER(4),
 PRIMARY KEY (AD_Type)
 );
-
+commit;
 CREATE TABLE  Aircraft_Type
 (
 Serial_Nbr CHAR(8),
@@ -46,7 +50,7 @@ AD_Type CHAR(5),
 FOREIGN KEY (AD_Type) REFERENCES Aircraft_Data(AD_Type),
 PRIMARY KEY (Serial_Nbr)
 );
-
+commit;
 CREATE TABLE Flight_Data
 (
 Flight_Nbr NUMBER(3),
@@ -56,7 +60,7 @@ Arr_Aprt_Code CHAR(3) CONSTRAINT Arr_Aprt_Code_nn NOT NULL,
 FOREIGN KEY (Arr_Aprt_Code) REFERENCES Airport(Aprt_Code),
 PRIMARY KEY (Flight_Nbr)
 );
-
+commit;
 CREATE TABLE Sched_Flight
 (
 Flight_Nbr NUMBER(9),
@@ -68,7 +72,7 @@ Dep_Time NUMBER(4) CONSTRAINT Dep_Time NOT NULL,
 Arr_Time NUMBER(4) CONSTRAINT Arr_Time NOT NULL,
 PRIMARY KEY (flight_nbr, flight_date)
 );
-
+commit;
 CREATE TABLE Reservation
 (
 Cust_Nbr NUMBER(4),
