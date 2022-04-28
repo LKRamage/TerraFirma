@@ -1,7 +1,9 @@
-CREATE VIEW Report1 AS
-SELECT DISTINCT Flight_NBR, Flight_Date, Capacity
+CREATE VIEW View1 AS
+SELECT Flight_NBR, Flight_Date, Capacity - COUNT (Cust_NBR) AS Jesus_Christ_I_Hate_This_Stupid_Column
 FROM Reservation
 JOIN Sched_Flight using (Flight_NBR, Flight_Date)
 JOIN Aircraft_Data using (Serial#)
 JOIN Aircraft_Type using (Type)
-Order by Flight_NBR;
+GROUP BY Flight_NBR, Flight_Date, Capacity;
+
+Select * FROM View1;
