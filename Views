@@ -6,6 +6,7 @@ TTITLE OFF
 SET FEEDBACK OFF
 SET Pagesize 75
 SET Linesize 100
+Column Flight_Date FORMAT A11
 CREATE VIEW View_1 AS
 SELECT Flight_Nbr, Flight_Date, Capacity - COUNT(Cust_Nbr) AS Seats_Available
 FROM Reservation
