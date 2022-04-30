@@ -8,11 +8,11 @@ SET Pagesize 75
 SET Linesize 100
 CREATE VIEW Report_One AS
 SELECT DISTINCT
-    Serial_NBR AS Serial_NBR, 
-    AD_Type AS TYPE, 
-    AD_Description AS Description, 
-    Capacity, AD_Range AS RANGE
-    FROM Aircraft_Type
+Serial_NBR AS Serial_NBR, 
+AD_Type AS TYPE, 
+AD_Description AS Description, 
+Capacity, AD_Range AS RANGE
+FROM Aircraft_Type
 JOIN Aircraft_Data USING (AD_Type)
 ORDER BY Serial_NBR;
 TTITLE 'TERRA FIRMA AIRLINES|AIRCRAFT REPORT'
@@ -24,32 +24,32 @@ SUM LABEL 'Total Capacity: ' OF Capacity ON Report;
 SELECT * from Report_One;
 --Report4
 SELECT
-    Flight_date,
-    Flight_Num,
-    AC_Serial,
-    COUNT (cust_Num) AS Seats_Reserved,
-    capacity - COUNT (cust_Num) AS Seats_Available
+Flight_date,
+Flight_Num,
+AC_Serial,
+COUNT (cust_Num) AS Seats_Reserved,
+capacity - COUNT (cust_Num) AS Seats_Available
 FROM
-    Sched_Flight
-    LEFT JOIN Reservation USING (Flight_Num, Flight_Date)
-    LEFT JOIN Aircraft USING (AC_Serial)
-    FULL JOIN Aircraft_Data USING (AC_Type)
+Sched_Flight
+LEFT JOIN Reservation USING (Flight_Num, Flight_Date)
+LEFT JOIN Aircraft USING (AC_Serial)
+FULL JOIN Aircraft_Data USING (AC_Type)
 GROUP BY
-    Flight_Num, Flight_Date, AC_Serial, Capacity
+Flight_Num, Flight_Date, AC_Serial, Capacity
 ORDER BY
-    Flight_Date, Flight_Num;
+Flight_Date, Flight_Num;
 
 select * from Seats_Available;
 --Report6
 CREATE VIEW Report_6(Flight_Num, Flight_Date, Cust_num) AS
 SELECT
-    Flight_num,
-    Flight_Date,
-    cust_num
+Flight_num,
+Flight_Date,
+cust_num
 FROM
-    reservation
+reservation
 ORDER BY
-    Flight_Num, Flight_Date, cust_num;
+Flight_Num, Flight_Date, cust_num;
 CLEAR COLUMNS
 CLEAR COMPUTE
 CLEAR BREAK
