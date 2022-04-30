@@ -1,18 +1,22 @@
-DROP VIEW View_1;
+DROP VIEW Query_1;
 CLEAR COMPUTE
 CLEAR BREAK
 TTITLE OFF
 SET FEEDBACK OFF
 SET Pagesize 75
 SET Linesize 100
-DROP VIEW View_One AS
+CREATE VIEW Query_1 AS
 SELECT
-Flight_Nbr, Flight_Date, Capacity - COUNT(Cust_Nbr) AS Seats_Available
-FROM Reservation
-JOIN Sched_Flight USING (Flight_Nbr, Flight_Date)
-JOIN Aircraft_Type USING (Serial_Nbr)
-JOIN Aircraft_Data USING (AD_Type)
-GROUP BY Flight_Nbr, Flight_Date, Capacity;
-TTITLE 'View One'
-BREAK ON r.Flight_Nbr;
-SELECT * FROM View_One;
+act.Serial_Nbr,
+ad.AD.Type,
+ad.AD_Description,
+ad.Capacity,
+ad.AD_Range,
+ad.Capacity - 150 AS Cap_Overage
+FROM Aircraft_Data ad, Aircraft_Type act
+WHERE act.AD_Type - ad.AD_Type
+AND ad.Capacity > 150
+ORDER BY act.Serial_Nbr;
+TTITLE 'Query 1'
+BREAK ON act.Serial_Nbr;
+SELECT * FROM Query_1;
