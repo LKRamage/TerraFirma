@@ -1,4 +1,4 @@
---View1
+--View_1
 DROP VIEW View_1;
 CLEAR COMPUTE
 CLEAR BREAK
@@ -17,7 +17,7 @@ GROUP BY Flight_Nbr, Flight_Date, Capacity;
 TTITLE 'View 1'
 BREAK ON r.Flight_Nbr;
 SELECT * FROM View_1;
---View2
+--View_2
 DROP VIEW View_2;
 CLEAR COMPUTE
 CLEAR BREAK
