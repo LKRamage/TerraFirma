@@ -30,5 +30,6 @@ SELECT Dep_Aprt_Code, Flight_Nbr, Flight_Date, Cust_Nbr
 FROM Sched_Flight
 LEFT JOIN Reservation using (Flight_Nbr, Flight_Date)
 JOIN Flight_Data using (Flight_Nbr);
+TTITLE 'View 2'
 Select * FROM View_2;
 commit;
