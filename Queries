@@ -1,0 +1,18 @@
+DROP VIEW View_1;
+CLEAR COMPUTE
+CLEAR BREAK
+TTITLE OFF
+SET FEEDBACK OFF
+SET Pagesize 75
+SET Linesize 100
+DROP VIEW View_One AS
+SELECT
+Flight_Nbr, Flight_Date, Capacity - COUNT(Cust_Nbr) AS Seats_Available
+FROM Reservation
+JOIN Sched_Flight USING (Flight_Nbr, Flight_Date)
+JOIN Aircraft_Type USING (Serial_Nbr)
+JOIN Aircraft_Data USING (AD_Type)
+GROUP BY Flight_Nbr, Flight_Date, Capacity;
+TTITLE 'View One'
+BREAK ON r.Flight_Nbr;
+SELECT * FROM View_One;
