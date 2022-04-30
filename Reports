@@ -1,4 +1,4 @@
-##Report4
+--Report4
 SELECT
     Flight_date,
     Flight_Num,
@@ -16,8 +16,7 @@ ORDER BY
     Flight_Date, Flight_Num;
 
 select * from Seats_Available;
-
-##Report6
+--Report6
 CREATE VIEW Report_6(Flight_Num, Flight_Date, Cust_num) AS
 SELECT
     Flight_num,
@@ -27,12 +26,10 @@ FROM
     reservation
 ORDER BY
     Flight_Num, Flight_Date, cust_num;
-
 CLEAR COLUMNS
 CLEAR COMPUTE
 CLEAR BREAK
 TTITLE OFF
-
 COLUMN Flight_Num HEADING 'Aircraft|Nbr'
 COLUMN Flight_Date HEADING 'Flight|Date'
 COLUMN cust_num HEADING 'Cust|Nbr'
@@ -41,5 +38,4 @@ SET PAGESIZE 30
 TTITLE 'TERRA FIRMA AIRLINES|FLIGHT RESERVATION SUMMARY'
 SET FEEDBACK OFF
 BREAK ON Flight_Num ON Flight_Date
-
 SELECT * FROM Report_6;

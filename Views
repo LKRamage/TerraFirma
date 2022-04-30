@@ -1,9 +1,16 @@
+--View1
 CREATE VIEW View1 AS
-SELECT Flight_NBR, Flight_Date, Capacity - COUNT (Cust_NBR) AS Jesus_Christ_I_Hate_This_Stupid_Column
+SELECT Flight_NBR, Flight_Date, Capacity - COUNT (Cust_NBR) AS Seats_Reserved
 FROM Reservation
 JOIN Sched_Flight using (Flight_NBR, Flight_Date)
 JOIN Aircraft_Data using (Serial#)
 JOIN Aircraft_Type using (Type)
 GROUP BY Flight_NBR, Flight_Date, Capacity;
-
 Select * FROM View1;
+--View2
+CREATE VIEW View2 AS
+SELECT Dep_Aprt_Code, Flight_Nbr, Flight_Date, Cust_Nbr
+FROM Sched_Flight
+LEFT JOIN Reservation using (Flight_Nbr, Flight_Date)
+JOIN Flight_Data using (Flight_Nbr);
+Select * FROM View2;
