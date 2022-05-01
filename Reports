@@ -1,3 +1,4 @@
+--Two new reports, 5 and 6, should be able to be produced.
 --Report_1
 DROP VIEW Report_One;
 CLEAR COMPUTE
