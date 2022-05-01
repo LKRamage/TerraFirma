@@ -1,13 +1,13 @@
 --Two new reports, 5 and 6, should be able to be produced.
 --Report_1
-DROP VIEW Report_One;
+DROP VIEW Report_1;
 CLEAR COMPUTE
 CLEAR BREAK
 TTITLE OFF
 SET FEEDBACK OFF
 SET Pagesize 75
 SET Linesize 100
-CREATE VIEW Report_One AS
+CREATE VIEW Report_1 AS
 SELECT DISTINCT
 Serial_NBR AS Serial_NBR, 
 AD_Type AS TYPE, 
@@ -22,7 +22,7 @@ BREAK ON REPORT SKIP 1
 COMPUTE COUNT LABEL 'Number of Aircraft:' -
 AVG LABEL 'Average Capacity: ' - 
 SUM LABEL 'Total Capacity: ' OF Capacity ON Report; 
-SELECT * from Report_One;
+SELECT * from Report_1;
 --Report_4
 SELECT
 Flight_date,
