@@ -38,7 +38,6 @@ GROUP BY
 Flight_Num, Flight_Date, AC_Serial, Capacity
 ORDER BY
 Flight_Date, Flight_Num;
-
 select * from Seats_Available;
 --Report_6
 CREATE VIEW Report_6(Flight_Num, Flight_Date, Cust_num) AS
