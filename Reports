@@ -1,4 +1,4 @@
---Report1
+--Report_1
 DROP VIEW Report_One;
 CLEAR COMPUTE
 CLEAR BREAK
@@ -22,7 +22,7 @@ COMPUTE COUNT LABEL 'Number of Aircraft:' -
 AVG LABEL 'Average Capacity: ' - 
 SUM LABEL 'Total Capacity: ' OF Capacity ON Report; 
 SELECT * from Report_One;
---Report4
+--Report_4
 SELECT
 Flight_date,
 Flight_Num,
@@ -40,7 +40,7 @@ ORDER BY
 Flight_Date, Flight_Num;
 
 select * from Seats_Available;
---Report6
+--Report_6
 CREATE VIEW Report_6(Flight_Num, Flight_Date, Cust_num) AS
 SELECT
 Flight_num,
