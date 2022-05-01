@@ -1,27 +1,26 @@
 --Two new reports, 5 and 6, should be able to be produced.
 --Report_1
 DROP VIEW Report_1;
+SET Pagesize 75
+SET Linesize 100
 CLEAR COMPUTE
 CLEAR BREAK
 TTITLE OFF
-SET FEEDBACK OFF
-SET Pagesize 75
-SET Linesize 100
 CREATE VIEW Report_1 AS
 SELECT DISTINCT
-Serial_NBR AS Serial_NBR, 
+Serial_Nbr AS Serial_Nbr, 
 AD_Type AS TYPE, 
 AD_Description AS Description, 
-Capacity, AD_Range AS RANGE
+Capacity, Ac_Range AS RANGE
 FROM Aircraft_Type
 JOIN Aircraft_Data USING (AD_Type)
 ORDER BY Serial_NBR;
-TTITLE 'TERRA FIRMA AIRLINES|AIRCRAFT REPORT'
+TTITLE CENTER 'TERRA FIRMA AIRLINES|AIRCRAFT REPORT'
+SET FEEDBACK ON
 COLUMN Serial_NBR FORMAT A23;
-BREAK ON REPORT SKIP 1
 COMPUTE COUNT LABEL 'Number of Aircraft:' -
-AVG LABEL 'Average Capacity: ' - 
-SUM LABEL 'Total Capacity: ' OF Capacity ON Report; 
+AVG LABEL 'Average Capacity:' - 
+SUM LABEL 'Total Capacity:' OF Capacity ON Report; 
 SELECT * from Report_1;
 --Report_4
 SELECT
