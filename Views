@@ -29,7 +29,7 @@ SET Linesize 100
 CREATE VIEW View_2 AS
 SELECT DISTINCT Dep_Aprt_Code, Flight_Nbr, Flight_Date, Cust_Nbr
 FROM Sched_Flight
-LEFT JOIN Reservation using (Flight_Nbr, Flight_Date)
+JOIN Reservation using (Flight_Nbr, Flight_Date)
 JOIN Flight_Data using (Flight_Nbr) order by Dep_Aprt_Code;
 TTITLE 'View 2'
 Select * FROM View_2;
