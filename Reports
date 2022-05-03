@@ -47,25 +47,24 @@ COLUMN Serial_Nbr FORMAT A10;
 SET FEEDBACK OFF; 
 select * from Report_4;
 --Report_6
-CREATE VIEW Report_6 (Flight_Num, Flight_Date, Cust_num) AS
-SELECT
-Flight_num,
-Flight_Date,
-cust_num
-FROM
-reservation
-ORDER BY
-Flight_Num, Flight_Date, cust_num;
-CLEAR COLUMNS
+DROP VIEW Report_6;
+SET Pagesize 75
+SET Linesize 100
 CLEAR COMPUTE
+CLEAR COLUMNS
 CLEAR BREAK
 TTITLE OFF
-COLUMN Flight_Num HEADING 'Aircraft|Nbr'
+SET FEEDBACK OFF
+CREATE VIEW Report_6 AS
+SELECT Flight_Nbr, Flight_Date, Cust_Nbr
+FROM reservation
+ORDER BY Flight_Nbr, Flight_Date, cust_Nbr;
+COLUMN Flight_Nbr HEADING 'Flight|Nbr'
 COLUMN Flight_Date HEADING 'Flight|Date'
-COLUMN cust_num HEADING 'Cust|Nbr'
+COLUMN Cust_Nbr HEADING 'Cust|Nbr'
 SET LINESIZE 80
 SET PAGESIZE 30
 TTITLE 'TERRA FIRMA AIRLINES|FLIGHT RESERVATION SUMMARY'
 SET FEEDBACK OFF
-BREAK ON Flight_Num ON Flight_Date
+BREAK ON Flight_Nbr ON Flight_Date
 SELECT * FROM Report_6;
