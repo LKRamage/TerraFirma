@@ -11,6 +11,7 @@ drop table Aircraft_Type;
 drop table Aircraft_Data;
 drop table Airport;
 drop table City;
+--Create Tables
 CREATE TABLE Customer
 ( 
 Cust_Nbr NUMBER(4) CONSTRAINT Cust_Nbr_pk PRIMARY KEY,
@@ -81,7 +82,7 @@ FOREIGN KEY(Cust_Nbr) REFERENCES Customer(Cust_Nbr),
 FOREIGN KEY(Flight_Nbr, Flight_Date) REFERENCES Sched_Flight(Flight_Nbr, Flight_Date)
 );
 commit;
---Insert Statements
+--Describe Tables
 DESCRIBE Customer;
 DESCRIBE City;
 DESCRIBE Aircraft_Data;
@@ -90,6 +91,7 @@ DESCRIBE Aircraft_Type;
 DESCRIBE Flight_Data;
 DESCRIBE Sched_Flight;
 DESCRIBE Reservation;
+--Insert Statements
 INSERT INTO Customer VALUES (1001, 'Ford');
 INSERT INTO Customer VALUES (1004, 'Pfeiffer');
 INSERT INTO Customer VALUES (1055, 'Harris');
@@ -165,7 +167,7 @@ INSERT INTO Reservation VALUES (1158, 110, '07-12-2000');
 INSERT INTO Reservation VALUES (1158, 899, '07-13-2000');
 SELECT * FROM Reservation;
 commit;
---Reports
+--Reports 1, 4, and 6
 --Report_1
 DROP VIEW Report_1;
 SET Pagesize 75
@@ -235,7 +237,7 @@ TTITLE 'TERRA FIRMA AIRLINES|FLIGHT RESERVATION SUMMARY'
 SET FEEDBACK OFF
 BREAK ON Flight_Nbr ON Flight_Date
 SELECT * FROM Report_6;
---Queries
+--Queries 1, 4, and 5
 --Query_1
 DROP VIEW Query_1;
 CLEAR COMPUTE
@@ -275,7 +277,8 @@ WHERE sf.Flight_Date NOT LIKE '07-12-2000%'
 ORDER BY sf.Flight_Date;
 BREAK ON act.Serial_Nbr;
 CREATE VIEW Query_Four_July13 AS
-SELECT sf.Flight_Date, act.AD_Type, ad.AD_description, ad.Capacity, ad.AC_range, act.Serial_Nbr
+SELECT sf.Flight_Date, act.AD_Type, ad.AD_description,
+ad.Capacity, ad.AC_range, act.Serial_Nbr
 FROM Aircraft_Type act
 JOIN Aircraft_Data ad ON act.AD_Type = ad.AD_Type
 JOIN Sched_Flight sf ON  SF.Serial_Nbr = ACT.Serial_Nbr
@@ -284,7 +287,8 @@ WHERE sf.Flight_Date NOT LIKE '07-13-2000%'
 ORDER BY sf.Flight_Date;
 BREAK ON act.Serial_Nbr;
 CREATE VIEW Query_Four_July14 AS
-SELECT sf.Flight_Date, act.AD_Type, ad.AD_description, ad.Capacity, ad.AC_range, act.Serial_Nbr
+SELECT sf.Flight_Date, act.AD_Type, ad.AD_description,
+ad.Capacity, ad.AC_range, act.Serial_Nbr
 FROM Aircraft_Type act
 JOIN Aircraft_Data ad ON act.AD_Type = ad.AD_Type
 JOIN Sched_Flight sf ON  sf.Serial_NBR = act.Serial_Nbr
@@ -292,9 +296,21 @@ JOIN Flight_Data fd ON fd.Flight_NBR = sf.Flight_Nbr
 WHERE sf.Flight_Date NOT LIKE '07-14-2000%'
 ORDER BY sf.Flight_Date;
 BREAK ON act.Serial_Nbr;
-SELECT * FROM Query_Four_July12; 
-SELECT * FROM Query_Four_July13; 
+Join Query_Four_July12 
+SELECT * FROM Query_Four_July12;
+SELECT * FROM Query_Four_July13;
 SELECT * FROM Query_Four_July14;
 --Query_5
+DROP VIEW Query_5;
+CREATE VIEW Query_5 AS
+SELECT DISTINCT
+v.Flight_Nbr, v.Flight_Date, v.Cust_Nbr, v.Aprt_Code,
+v.City_Name, v.Dep_Time, v.Dep_Aprt_Code, fd.Arr_Aprt_Code, sf.Arr_Time
+FROM View_2 v
+JOIN Flight_Data fd ON fd.Flight_Nbr = v.Flight_Nbr
+JOIN Sched_Flight sf ON sf.Flight_Nbr = v.Flight_Nbr
+ORDER BY Cust_Nbr, Aprt_Code, Dep_Time;
+SELECT * FROM Query_5;
 --Modifications
---Modification_1
+--Modification 1
+commit;
