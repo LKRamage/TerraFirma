@@ -4,5 +4,14 @@ INSERT INTO City (City_Code, City_Name, C_State) VALUES (180, 'Kansas City', 'MO
 INSERT INTO Airport (Aprt_Code, City_Code, Aprt_Name) VALUES ('KCI', 180, 'Kansas City Internat. Airport');
 INSERT INTO Flight_Data (Flight_Nbr, Dep_Aprt_Code, Arr_Aprt_Code) VALUES (200, 'MEM', 'KCI');
 INSERT INTO Flight_Data (Flight_Nbr, Dep_Aprt_Code, Arr_Aprt_Code) VALUES (421, 'KCI', 'MEM');
-INSERT INTO Sched_Flight (Flight_Nbr, Flight_Date, Serial_Nbr, Dep_Time, Arr_Time) VALUES (200, '07-15-2000', '', 'TBD', 'TBD');
+INSERT INTO Sched_Flight (Flight_Nbr, Flight_Date, Serial_Nbr, Dep_Time, Arr_Time) VALUES (200, '07-15-2000', '', NULL, NULL);
 INSERT INTO Sched_Flight (Flight_Nbr, Flight_Date, Serial_Nbr, Dep_Time, Arr_Time) VALUES (421, '07-15-2000', '', 1730, 1915);
+Column C_State FORMAT A11;
+Column Dep_Aprt_Code FORMAT A13;
+Column Arr_Aprt_Code FORMAT A13;
+Column Aprt_Code FORMAT A13;
+SELECT * FROM City;
+SELECT * FROM Airport;
+SELECT * FROM Flight_Data;
+SELECT * FROM Sched_Flight;
+commit;

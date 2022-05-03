@@ -67,8 +67,8 @@ FOREIGN KEY (Flight_Nbr) REFERENCES Flight_Data(Flight_Nbr),
 Flight_Date CHAR(10),
 Serial_Nbr CHAR(8),
 FOREIGN KEY (Serial_Nbr) REFERENCES Aircraft_Type(Serial_Nbr),
-Dep_Time NUMBER(4) CONSTRAINT Dep_Time NOT NULL,
-Arr_Time NUMBER(4) CONSTRAINT Arr_Time NOT NULL,
+Dep_Time NUMBER(4) CONSTRAINT Dep_Time,
+Arr_Time NUMBER(4) CONSTRAINT Arr_Time,
 PRIMARY KEY (flight_nbr, flight_date)
 );
 commit;
