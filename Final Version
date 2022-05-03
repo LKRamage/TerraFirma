@@ -334,4 +334,7 @@ SELECT * FROM City;
 SELECT * FROM Airport;
 SELECT * FROM Flight_Data;
 SELECT * FROM Sched_Flight;
+--Modification_2
+CREATE INDEX Cust_Nbr_Index
+ON RESERVATION (Cust_Nbr);
 commit;
