@@ -22,14 +22,14 @@ CREATE TABLE City
 (
 City_Code NUMBER(3) CONSTRAINT City_Code_pk PRIMARY KEY,
 City_Name VARCHAR2(12) CONSTRAINT City_Name_nn NOT NULL,
-C_State_ CHAR(2) CONSTRAINT C_State_nn NOT NULL
+C_State CHAR(2) CONSTRAINT C_State_nn NOT NULL
 );
 commit;
 CREATE TABLE Airport
 (
 Aprt_Code CHAR(3) CONSTRAINT Aprt_Code_pk PRIMARY KEY,
 City_Code NUMBER(3),
-Aprt_Name CHAR(26) CONSTRAINT Aprt_Name_nn NOT NULL,
+Aprt_Name CHAR(29) CONSTRAINT Aprt_Name_nn NOT NULL,
 FOREIGN KEY (City_Code) REFERENCES City(City_Code)
 );
 commit;
