@@ -9,14 +9,9 @@ SET Pagesize 75
 SET Linesize 100
 CREATE VIEW Query_1 AS
 SELECT
-act.Serial_Nbr,
-ad.AD.Type,
-ad.AD_Description,
-ad.Capacity,
-ad.AD_Range,
-ad.Capacity - 150 AS Cap_Overage
+act.Serial_Nbr, ad.AD.Type, ad.AD_Description, ad.Capacity, ad.AC_Range, ad.Capacity - 150 AS Cap_Overage
 FROM Aircraft_Data ad, Aircraft_Type act
-WHERE act.AD_Type - ad.AD_Type
+WHERE act.AD_Type = ad.AD_Type
 AND ad.Capacity > 150
 ORDER BY act.Serial_Nbr;
 TTITLE 'Query 1'
@@ -38,7 +33,7 @@ SF.Flight_Date,
 ACT.AD_Type,
 AD.AD_description, 
 AD.Capacity, 
-AD.AD_range,
+AD.AC_range,
 ACT.Serial_NBR
 FROM 
 Aircraft_Type ACT
@@ -54,7 +49,7 @@ SF.Flight_Date,
 ACT.AD_Type,
 AD.AD_description, 
 AD.Capacity, 
-AD.AD_range,
+AD.AC_range,
 ACT.Serial_NBR
 FROM 
 Aircraft_Type ACT
@@ -70,7 +65,7 @@ SF.Flight_Date,
 ACT.AD_Type,
 AD.AD_description, 
 AD.Capacity, 
-AD.AD_range,
+AD.AC_range,
 ACT.Serial_NBR
 FROM 
 Aircraft_Type ACT
