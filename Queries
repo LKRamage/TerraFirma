@@ -7,16 +7,20 @@ TTITLE OFF
 SET FEEDBACK OFF
 SET Pagesize 75
 SET Linesize 100
-CREATE VIEW Query_1 AS
-SELECT
-act.Serial_Nbr, ad.AD.Type, ad.AD_Description, ad.Capacity, ad.AC_Range, ad.Capacity - 150 AS Cap_Overage
+CREATE VIEW QUERY_1 AS
+SELECT act.Serial_Nbr, ad.AD_Type, ad.AD_Description, ad.Capacity, ad.AC_Range, ad.Capacity - 150 AS Cap_Overage
 FROM Aircraft_Data ad, Aircraft_Type act
 WHERE act.AD_Type = ad.AD_Type
 AND ad.Capacity > 150
 ORDER BY act.Serial_Nbr;
 TTITLE 'Query 1'
 BREAK ON act.Serial_Nbr;
+COLUMN Serial_Nbr FORMAT A11;
+COLUMN AD_Type FORMAT A11;
 SELECT * FROM Query_1;
+
+
+
 --Query_4
 DROP VIEW Query_FOUR_July12;
 DROP VIEW Query_FOUR_July13;
