@@ -67,7 +67,7 @@ CREATE VIEW Query_5 AS
 SELECT DISTINCT
 v.Flight_Nbr, v.Flight_Date, v.Cust_Nbr, v.Aprt_Code,
 v.City_Name, v.Dep_Time, v.Dep_Aprt_Code, fd.Arr_Aprt_Code, sf.Arr_Time
-FROM View2 v
+FROM View_2 v
 JOIN Flight_Data fd ON fd.Flight_Nbr = v.Flight_Nbr
 JOIN Sched_Flight sf ON sf.Flight_Nbr = v.Flight_Nbr
 ORDER BY Cust_Nbr, Aprt_Code, Dep_Time;
