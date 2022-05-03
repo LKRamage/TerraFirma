@@ -23,24 +23,29 @@ AVG LABEL 'Average Capacity:' -
 SUM LABEL 'Total Capacity:' OF Capacity ON Report; 
 SELECT * from Report_1;
 --Report_4
-SELECT
-Flight_date,
-Flight_Num,
-AC_Serial,
-COUNT (cust_Num) AS Seats_Reserved,
-capacity - COUNT (cust_Num) AS Seats_Available
-FROM
-Sched_Flight
-LEFT JOIN Reservation USING (Flight_Num, Flight_Date)
-LEFT JOIN Aircraft USING (AC_Serial)
-FULL JOIN Aircraft_Data USING (AC_Type)
-GROUP BY
-Flight_Num, Flight_Date, AC_Serial, Capacity
-ORDER BY
-Flight_Date, Flight_Num;
-select * from Seats_Available;
+DROP VIEW Report_4;
+SET Pagesize 75
+SET Linesize 100
+CLEAR COMPUTE
+CLEAR BREAK
+TTITLE OFF
+SET FEEDBACK OFF
+CREATE VIEW Report_4 AS
+SELECT Flight_date, Flight_Nbr, Serial_Nbr,
+COUNT (Cust_Nbr) AS
+Seats_Reserved, capacity - COUNT (cust_Nbr) AS
+Seats_Available
+FROM Sched_Flight
+LEFT JOIN Reservation USING (Flight_Nbr, Flight_Date)
+LEFT JOIN Aircraft_Type USING (Serial_Nbr)
+FULL JOIN Aircraft_Data USING (AD_Type)
+GROUP BY Flight_Nbr, Flight_Date, Serial_Nbr, Capacity
+ORDER BY Flight_Date, Flight_Nbr;
+TTITLE 'TERRA FIRMA AIRLINES|SCHEDULED FLIGHT SUMMARY'
+SET FEEDBACK OFF; 
+select * from Report_4;
 --Report_6
-CREATE VIEW Report_6(Flight_Num, Flight_Date, Cust_num) AS
+CREATE VIEW Report_6 (Flight_Num, Flight_Date, Cust_num) AS
 SELECT
 Flight_num,
 Flight_Date,
