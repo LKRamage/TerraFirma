@@ -11,7 +11,6 @@ drop table Aircraft_Type;
 drop table Aircraft_Data;
 drop table Airport;
 drop table City;
---Create Tables
 CREATE TABLE Customer
 ( 
 Cust_Nbr NUMBER(4) CONSTRAINT Cust_Nbr_pk PRIMARY KEY,
@@ -67,8 +66,8 @@ FOREIGN KEY (Flight_Nbr) REFERENCES Flight_Data(Flight_Nbr),
 Flight_Date CHAR(10),
 Serial_Nbr CHAR(8),
 FOREIGN KEY (Serial_Nbr) REFERENCES Aircraft_Type(Serial_Nbr),
-Dep_Time NUMBER(4) CONSTRAINT Dep_Time,
-Arr_Time NUMBER(4) CONSTRAINT Arr_Time,
+Dep_Time NUMBER(4),
+Arr_Time NUMBER(4),
 PRIMARY KEY (flight_nbr, flight_date)
 );
 commit;
@@ -82,7 +81,7 @@ FOREIGN KEY(Cust_Nbr) REFERENCES Customer(Cust_Nbr),
 FOREIGN KEY(Flight_Nbr, Flight_Date) REFERENCES Sched_Flight(Flight_Nbr, Flight_Date)
 );
 commit;
---Describe Tables
+--Table Describes
 DESCRIBE Customer;
 DESCRIBE City;
 DESCRIBE Aircraft_Data;
@@ -167,7 +166,46 @@ INSERT INTO Reservation VALUES (1158, 110, '07-12-2000');
 INSERT INTO Reservation VALUES (1158, 899, '07-13-2000');
 SELECT * FROM Reservation;
 commit;
---Reports 1, 4, and 6
+--Views
+--View_1
+DROP VIEW View_1;
+CLEAR COMPUTE
+CLEAR BREAK
+TTITLE OFF
+SET FEEDBACK OFF
+SET Pagesize 75
+SET Linesize 100
+Column Flight_Date FORMAT A11
+CREATE VIEW View_1 AS
+SELECT Flight_Nbr, Flight_Date, Capacity - COUNT(Cust_Nbr) AS Seats_Available
+FROM Reservation
+JOIN Sched_Flight USING (Flight_Nbr, Flight_Date)
+JOIN Aircraft_Type USING (Serial_Nbr)
+JOIN Aircraft_Data USING (AD_Type)
+GROUP BY Flight_Nbr, Flight_Date, Capacity;
+TTITLE 'View 1'
+BREAK ON r.Flight_Nbr;
+SELECT * FROM View_1;
+--View_2
+DROP VIEW View_2;
+CLEAR COMPUTE
+CLEAR BREAK
+TTITLE OFF
+SET FEEDBACK OFF
+SET Pagesize 80
+SET Linesize 100
+CREATE VIEW View_2 AS
+SELECT DISTINCT fd.Dep_Aprt_Code, res.Flight_Nbr,
+res.Flight_Date, res.Cust_Nbr, aprt.Aprt_code, c.City_Name, sf.Dep_Time
+FROM Sched_Flight sf
+JOIN Reservation res ON res.Flight_Nbr = sf.Flight_Nbr AND res.Flight_Date = sf.Flight_Date
+JOIN Flight_Data fd ON res.Flight_Nbr = fd.Flight_Nbr
+JOIN Airport aprt ON fd.Dep_Aprt_Code = aprt.Aprt_Code
+JOIN City c ON c.City_Code = aprt.City_Code
+ORDER BY Dep_Aprt_Code, Flight_Nbr, Flight_Date, Cust_Nbr;
+SELECT * FROM View_2;
+commit;
+--Reports
 --Report_1
 DROP VIEW Report_1;
 SET Pagesize 75
@@ -237,7 +275,7 @@ TTITLE 'TERRA FIRMA AIRLINES|FLIGHT RESERVATION SUMMARY'
 SET FEEDBACK OFF
 BREAK ON Flight_Nbr ON Flight_Date
 SELECT * FROM Report_6;
---Queries 1, 4, and 5
+--Queries
 --Query_1
 DROP VIEW Query_1;
 CLEAR COMPUTE
@@ -312,5 +350,19 @@ JOIN Sched_Flight sf ON sf.Flight_Nbr = v.Flight_Nbr
 ORDER BY Cust_Nbr, Aprt_Code, Dep_Time;
 SELECT * FROM Query_5;
 --Modifications
---Modification 1
+--Modification_1
+INSERT INTO City (City_Code, City_Name, C_State) VALUES (180, 'Kansas City', 'MO');
+INSERT INTO Airport (Aprt_Code, City_Code, Aprt_Name) VALUES ('KCI', 180, 'Kansas City Internat. Airport');
+INSERT INTO Flight_Data (Flight_Nbr, Dep_Aprt_Code, Arr_Aprt_Code) VALUES (200, 'MEM', 'KCI');
+INSERT INTO Flight_Data (Flight_Nbr, Dep_Aprt_Code, Arr_Aprt_Code) VALUES (421, 'KCI', 'MEM');
+INSERT INTO Sched_Flight (Flight_Nbr, Flight_Date, Serial_Nbr, Dep_Time, Arr_Time) VALUES (200, '07-15-2000', '', NULL, NULL);
+INSERT INTO Sched_Flight (Flight_Nbr, Flight_Date, Serial_Nbr, Dep_Time, Arr_Time) VALUES (421, '07-15-2000', '', 1730, 1915);
+Column C_State FORMAT A11;
+Column Dep_Aprt_Code FORMAT A13;
+Column Arr_Aprt_Code FORMAT A13;
+Column Aprt_Code FORMAT A13;
+SELECT * FROM City;
+SELECT * FROM Airport;
+SELECT * FROM Flight_Data;
+SELECT * FROM Sched_Flight;
 commit;
