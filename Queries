@@ -19,48 +19,48 @@ COLUMN Serial_Nbr FORMAT A11;
 COLUMN AD_Type FORMAT A11;
 SELECT * FROM Query_1;
 --Query_4
-DROP VIEW Query_Four_July12;
-DROP VIEW Query_Four_July13;
-DROP VIEW Query_Four_July14;
-CLEAR COMPUTE
-CLEAR BREAK
-TTITLE OFF
-SET FEEDBACK OFF
-SET Pagesize 75
-SET Linesize 100
-CREATE VIEW Query_Four_July12 AS
-SELECT sf.Flight_Date, act.AD_Type, ad.AD_description, ad.Capacity, ad.AC_range, act.Serial_Nbr
-FROM Aircraft_Type act
-JOIN Aircraft_Data ad ON act.AD_Type = ad.AD_Type
-JOIN Sched_Flight sf ON  sf.Serial_Nbr = act.Serial_Nbr
-JOIN Flight_Data fd ON fd.Flight_Nbr = sf.Flight_Nbr
-WHERE sf.Flight_Date NOT LIKE '07-12-2000%'
-ORDER BY sf.Flight_Date;
-BREAK ON act.Serial_Nbr;
-CREATE VIEW Query_Four_July13 AS
-SELECT sf.Flight_Date, act.AD_Type, ad.AD_description,
-ad.Capacity, ad.AC_range, act.Serial_Nbr
-FROM Aircraft_Type act
-JOIN Aircraft_Data ad ON act.AD_Type = ad.AD_Type
-JOIN Sched_Flight sf ON  SF.Serial_Nbr = ACT.Serial_Nbr
-JOIN Flight_Data fd ON fd.Flight_Nbr = sf.Flight_Nbr
-WHERE sf.Flight_Date NOT LIKE '07-13-2000%'
-ORDER BY sf.Flight_Date;
-BREAK ON act.Serial_Nbr;
-CREATE VIEW Query_Four_July14 AS
-SELECT sf.Flight_Date, act.AD_Type, ad.AD_description,
-ad.Capacity, ad.AC_range, act.Serial_Nbr
-FROM Aircraft_Type act
-JOIN Aircraft_Data ad ON act.AD_Type = ad.AD_Type
-JOIN Sched_Flight sf ON  sf.Serial_NBR = act.Serial_Nbr
-JOIN Flight_Data fd ON fd.Flight_NBR = sf.Flight_Nbr
-WHERE sf.Flight_Date NOT LIKE '07-14-2000%'
-ORDER BY sf.Flight_Date;
-BREAK ON act.Serial_Nbr;
-Join Query_Four_July12 
-SELECT * FROM Query_Four_July12;
-SELECT * FROM Query_Four_July13;
-SELECT * FROM Query_Four_July14;
+-- DROP VIEW Query_Four_July12;
+-- DROP VIEW Query_Four_July13;
+-- DROP VIEW Query_Four_July14;
+-- CLEAR COMPUTE
+-- CLEAR BREAK
+-- TTITLE OFF
+-- SET FEEDBACK OFF
+-- SET Pagesize 75
+-- SET Linesize 100
+-- CREATE VIEW Query_Four_July12 AS
+-- SELECT sf.Flight_Date, act.AD_Type, ad.AD_description, ad.Capacity, ad.AC_range, act.Serial_Nbr
+-- FROM Aircraft_Type act
+-- JOIN Aircraft_Data ad ON act.AD_Type = ad.AD_Type
+-- JOIN Sched_Flight sf ON  sf.Serial_Nbr = act.Serial_Nbr
+-- JOIN Flight_Data fd ON fd.Flight_Nbr = sf.Flight_Nbr
+-- WHERE sf.Flight_Date NOT LIKE '07-12-2000%'
+-- ORDER BY sf.Flight_Date;
+-- BREAK ON act.Serial_Nbr;
+-- CREATE VIEW Query_Four_July13 AS
+-- SELECT sf.Flight_Date, act.AD_Type, ad.AD_description,
+-- ad.Capacity, ad.AC_range, act.Serial_Nbr
+-- FROM Aircraft_Type act
+-- JOIN Aircraft_Data ad ON act.AD_Type = ad.AD_Type
+-- JOIN Sched_Flight sf ON  SF.Serial_Nbr = ACT.Serial_Nbr
+-- JOIN Flight_Data fd ON fd.Flight_Nbr = sf.Flight_Nbr
+-- WHERE sf.Flight_Date NOT LIKE '07-13-2000%'
+-- ORDER BY sf.Flight_Date;
+-- BREAK ON act.Serial_Nbr;
+-- CREATE VIEW Query_Four_July14 AS
+-- SELECT sf.Flight_Date, act.AD_Type, ad.AD_description,
+-- ad.Capacity, ad.AC_range, act.Serial_Nbr
+-- FROM Aircraft_Type act
+-- JOIN Aircraft_Data ad ON act.AD_Type = ad.AD_Type
+-- JOIN Sched_Flight sf ON  sf.Serial_NBR = act.Serial_Nbr
+-- JOIN Flight_Data fd ON fd.Flight_NBR = sf.Flight_Nbr
+-- WHERE sf.Flight_Date NOT LIKE '07-14-2000%'
+-- ORDER BY sf.Flight_Date;
+-- BREAK ON act.Serial_Nbr;
+-- Join Query_Four_July12 
+-- SELECT * FROM Query_Four_July12;
+-- SELECT * FROM Query_Four_July13;
+-- SELECT * FROM Query_Four_July14;
 --Query_5
 DROP VIEW Query_5;
 CREATE VIEW Query_5 AS
@@ -74,7 +74,7 @@ ORDER BY Cust_Nbr, Aprt_Code, Dep_Time;
 SELECT * FROM Query_5;
 
 
---Diff q4, 
+--NEW Query_4, 
 DROP VIEW Query_4;
 TTITLE OFF
 CREATE VIEW Query_4 AS
