@@ -72,3 +72,19 @@ JOIN Flight_Data fd ON fd.Flight_Nbr = v.Flight_Nbr
 JOIN Sched_Flight sf ON sf.Flight_Nbr = v.Flight_Nbr
 ORDER BY Cust_Nbr, Aprt_Code, Dep_Time;
 SELECT * FROM Query_5;
+
+
+--Diff q4, 
+DROP VIEW Query_4;
+TTITLE OFF
+CREATE VIEW Query_4 AS
+SELECT DISTINCT sf.Flight_date, act.Serial_Nbr, ad.AD_Type, ad.AD_Description, ad.Capacity, ad.AC_Range
+FROM Sched_Flight sf CROSS JOIN Aircraft_Type act
+JOIN Aircraft_Data ad ON (ad.AD_Type = act.AD_Type)
+MINUS
+SELECT Flight_Date, Serial_Nbr, AD_Type, AD_Description, Capacity, AC_Range
+FROM Sched_Flight JOIN Aircraft_Type USING(Serial_Nbr)
+JOIN Aircraft_Data USING(AD_Type)
+ORDER BY Flight_Date;
+TTITLE 'Query 4'
+SELECT * FROM QUERY_4;
