@@ -290,7 +290,6 @@ FROM Aircraft_Data ad, Aircraft_Type act
 WHERE act.AD_Type = ad.AD_Type
 AND ad.Capacity > 150
 ORDER BY act.Serial_Nbr;
-TTITLE 'Query 1'
 BREAK ON act.Serial_Nbr;
 COLUMN Serial_Nbr FORMAT A11;
 COLUMN AD_Type FORMAT A11;
@@ -307,7 +306,6 @@ SELECT Flight_Date, Serial_Nbr, AD_Type, AD_Description, Capacity, AC_Range
 FROM Sched_Flight JOIN Aircraft_Type USING(Serial_Nbr)
 JOIN Aircraft_Data USING(AD_Type)
 ORDER BY Flight_Date;
-TTITLE 'Query 4'
 SELECT * FROM QUERY_4;
 --Query_5
 DROP VIEW Query_5;
