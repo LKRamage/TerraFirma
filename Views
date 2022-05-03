@@ -24,13 +24,16 @@ CLEAR COMPUTE
 CLEAR BREAK
 TTITLE OFF
 SET FEEDBACK OFF
-SET Pagesize 75
+SET Pagesize 80
 SET Linesize 100
 CREATE VIEW View_2 AS
-SELECT DISTINCT Dep_Aprt_Code, Flight_Nbr, Flight_Date, Cust_Nbr
-FROM Sched_Flight
-JOIN Reservation using (Flight_Nbr, Flight_Date)
-JOIN Flight_Data using (Flight_Nbr) order by Dep_Aprt_Code;
-TTITLE 'View 2'
-Select * FROM View_2;
+SELECT DISTINCT fd.Dep_Aprt_Code, res.Flight_Nbr,
+res.Flight_Date, res.Cust_Nbr, aprt.Aprt_code, c.City_Name, sf.Dep_Time
+FROM Sched_Flight sf
+JOIN Reservation res ON res.Flight_Nbr = sf.Flight_Nbr AND res.Flight_Date = sf.Flight_Date
+JOIN Flight_Data fd ON res.Flight_Nbr = fd.Flight_Nbr
+JOIN Airport aprt ON fd.Dep_Aprt_Code = aprt.Aprt_Code
+JOIN City c ON c.City_Code = aprt.City_Code
+ORDER BY Dep_Aprt_Code, Flight_Nbr, Flight_Date, Cust_Nbr;
+SELECT * FROM View_2;
 commit;
