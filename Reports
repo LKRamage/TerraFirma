@@ -42,6 +42,8 @@ FULL JOIN Aircraft_Data USING (AD_Type)
 GROUP BY Flight_Nbr, Flight_Date, Serial_Nbr, Capacity
 ORDER BY Flight_Date, Flight_Nbr;
 TTITLE 'TERRA FIRMA AIRLINES|SCHEDULED FLIGHT SUMMARY'
+COLUMN Flight_Date FORMAT A11;
+COLUMN Serial_Nbr FORMAT A10;
 SET FEEDBACK OFF; 
 select * from Report_4;
 --Report_6
