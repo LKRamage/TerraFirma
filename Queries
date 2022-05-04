@@ -19,6 +19,7 @@ COLUMN Serial_Nbr FORMAT A11;
 COLUMN AD_Type FORMAT A11;
 SELECT * FROM Query_1;
 --Query_2
+DROP VIEW Query_2;
 CLEAR COMPUTE
 CLEAR BREAK
 TTITLE OFF
@@ -26,13 +27,8 @@ SET FEEDBACK OFF
 SET Pagesize 75
 SET Linesize 100
 CREATE VIEW QUERY_2 AS
-SELECT
-sf.Flight_Nbr,
-sf.Serial_Nbr,
-sf.Flight_Date,
-act.AD_Type
-FROM
-Sched_Flight sf
+SELECT sf.Flight_Nbr, sf.Serial_Nbr, sf.Flight_Date, act.AD_Type
+FROM Sched_Flight sf
 JOIN Aircraft_Type act ON act.Serial_Nbr = sf.Serial_Nbr
 WHERE Flight_Date = '12-JUL-22' AND
 (Flight_Nbr = 181 
